@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class PipeMovement : MonoBehaviour
 {
@@ -14,13 +12,14 @@ public class PipeMovement : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isGameOver) return;
         MovePipe();
     }
 
     private void MovePipe()
     {
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
-        if (transform.position.x < _edgeX)
+        if (transform.position.x < _edgeX - 1f)
         { 
             Destroy(gameObject);
         }

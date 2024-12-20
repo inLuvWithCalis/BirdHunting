@@ -1,13 +1,13 @@
-using System;
 using UnityEngine;
+
 public class PipeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject pipePrefab;
-    private float timeBetweenSpawns = 2f;
+    private float timeBetweenSpawns = 3f;
     private float _timeBetweenSpawnsCounter;
-    private float _rangeYPosition = 2f;
-    private float _startX;
-    private float _startY;
+    private float _rangeYPosition = 3f;
+    private float _range;
+    
 
 
     private void Start()
@@ -17,6 +17,7 @@ public class PipeSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isGameOver) return;
         TimeToSpawnPipe();
     }
 
@@ -35,8 +36,8 @@ public class PipeSpawner : MonoBehaviour
 
     private void SpwanPipe()
     {
-        var range = UnityEngine.Random.Range(-_rangeYPosition, _rangeYPosition);
-        transform.position = new Vector3(transform.position.x, range, transform.position.z);
+        _range = Random.Range(-_rangeYPosition, _rangeYPosition);
+        transform.position = new Vector3(transform.position.x, _range, transform.position.z);
         Instantiate(pipePrefab, transform.position, Quaternion.identity);
     }
 }
